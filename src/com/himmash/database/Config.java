@@ -3,8 +3,8 @@ package com.himmash.database;
 import com.himmash.model.Users;
 
 public class Config {
-    public static String dbName = "procedure";
-    public static String dbHost = "localhost";
+    public static String dbName = "khm_documents";
+    public static String dbHost = "192.168.128.60";
     public static String dbPort = "3306";
     public static String dbUser = "root";
     public static String dbPass = "Vecrek";

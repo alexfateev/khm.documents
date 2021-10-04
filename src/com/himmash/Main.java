@@ -1,7 +1,14 @@
 package com.himmash;
 
+import com.himmash.controllers.DocEdit;
+import com.himmash.controllers.DocFileSelectController;
 import com.himmash.controllers.MainController;
+import com.himmash.database.Config;
+import com.himmash.database.DBHandler;
+import com.himmash.model.Doc;
+import com.himmash.model.DocFiles;
 import com.himmash.utils.CustomAlert;
+import com.himmash.utils.Utils;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -11,13 +18,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import com.himmash.controllers.DocEdit;
-import com.himmash.controllers.DocFileSelectController;
-import com.himmash.database.Config;
-import com.himmash.database.DBHandler;
-import com.himmash.model.Doc;
-import com.himmash.model.DocFiles;
-import com.himmash.utils.Utils;
 
 import java.awt.*;
 import java.io.File;
@@ -44,14 +44,14 @@ public class Main extends Application {
         try (InputStream is = new FileInputStream("src/com/himmash/config.properties")) {
             Properties properties = new Properties();
             properties.load(is);
-            Config.dbHost = properties.getProperty("db.Host", "192.168.129.60");
-            Config.dbPort = properties.getProperty("db.Port", "3306");
-            Config.dbName = properties.getProperty("db.Name", "khm_documents");
-            Config.dbUser = properties.getProperty("db.User", "user");
-            Config.dbPass = properties.getProperty("db.Pass", "Vecrek");
-            Config.dbParam = properties.getProperty("db.Param", "");
+            Config.dbHost = properties.getProperty("db.Host");
+            Config.dbPort = properties.getProperty("db.Port");
+            Config.dbName = properties.getProperty("db.Name");
+            Config.dbUser = properties.getProperty("db.User");
+            Config.dbPass = properties.getProperty("db.Pass");
+            Config.dbParam = properties.getProperty("db.Param");
         } catch (IOException e) {
-            e.printStackTrace();
+            new CustomAlert(Alert.AlertType.ERROR, null, e.getMessage());
         }
     }
 
@@ -92,9 +92,10 @@ public class Main extends Application {
 
     public void initRootLayout() {
         try {
+            System.out.println("Загружаем корневой макет из fxml файла.");
             // Загружаем корневой макет из fxml файла.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("Views/main.fxml"));
+            loader.setLocation(Main.class.getResource("views/main.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Отображаем сцену, содержащую корневой макет.

@@ -318,7 +318,7 @@ public class MainController {
 
         dbHandler = Main.getDbHandler();
 
-        checkAllFiles();
+        //checkAllFiles();
 
         colDocNumber.setCellValueFactory(cellData -> cellData.getValue().numberProperty());
         colDocDesignation.setCellValueFactory(cellData -> cellData.getValue().designationProperty());

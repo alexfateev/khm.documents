@@ -29,6 +29,7 @@ public class DBHandler extends Config {
     }
 
     public DBHandler() {
+        System.out.println("dbHandler");
         connection = getConnection();
         loadParameters();
         user = getUser(Utils.getFullUserName());
@@ -93,7 +94,7 @@ public class DBHandler extends Config {
             System.out.println("Database connected.");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-            new CustomAlert(Alert.AlertType.ERROR, "KHM Docs", null, e.getMessage());
+            new CustomAlert(Alert.AlertType.ERROR, null, e.getMessage());
         }
         return connection;
     }
