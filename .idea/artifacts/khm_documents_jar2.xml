@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="khm.documents:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/khm_documents_jar2</output-path>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
+    <root id="root">
+      <element id="archive" name="khm.documents.jar">
+        <element id="module-output" name="khm.documents" />
+      </element>
+      <element id="library" level="project" name="mysql-connector-java-8.0.18" />
+    </root>
+  </artifact>
+</component>

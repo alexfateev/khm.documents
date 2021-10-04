@@ -1,0 +1,9 @@
+#pane {
+    -fx-background-color: palegreen;
+    -fx-background-radius:5,5,5,5;
+
+}
+
+#label{
+-fx-blend-mode:darken ;
+}

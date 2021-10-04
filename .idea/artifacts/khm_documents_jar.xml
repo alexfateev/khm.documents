@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="khm.documents:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/khm_documents_jar</output-path>
+    <root id="archive" name="khm.documents.jar">
+      <element id="module-output" name="khm.documents" />
+      <element id="extracted-dir" path="E:/Java/lib/mysql-connector-java-8.0.18.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
