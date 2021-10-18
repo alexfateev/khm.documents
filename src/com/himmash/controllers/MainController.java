@@ -1,26 +1,22 @@
 package com.himmash.controllers;
 
+import com.himmash.Main;
+import com.himmash.database.Config;
+import com.himmash.database.DBHandler;
+import com.himmash.model.Category;
+import com.himmash.model.Doc;
+import com.himmash.model.DocFiles;
 import com.himmash.utils.CustomAlert;
+import com.himmash.utils.Utils;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import com.himmash.database.Config;
-import com.himmash.database.DBHandler;
-import com.himmash.Main;
-import com.himmash.model.Category;
-import com.himmash.model.Doc;
-import com.himmash.model.DocFiles;
-import com.himmash.utils.Utils;
+import org.controlsfx.control.textfield.TextFields;
 
 import java.io.File;
 import java.io.IOException;
@@ -99,7 +95,6 @@ public class MainController {
     @FXML
     private TableColumn<DocFiles, String> colFile;
 
-
     ObservableList<Doc> docs = FXCollections.observableArrayList();
     FilteredList<Doc> filteredData;
     DBHandler dbHandler;
@@ -111,15 +106,44 @@ public class MainController {
     }
 
     public void setInterface() {
+        TextField testField = TextFields.createClearableTextField();
+        testField.setPrefWidth(250);
+        testField.setPromptText("Поиск...");
+        testField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(d -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (d.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (d.getDesignation().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                } else if (d.getNumber().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false; // Does not match.
+            });
+        });
+
         toolbar.getChildren().clear();
         btnOpenCard.setDisable(true);
         miDocEdit.setDisable(true);
         miDocDelete.setDisable(true);
         if (Config.user == null) {
-            toolbar.getChildren().addAll(btnRefresh, btnOpenCard, textSearch, btnReset);
+            toolbar.getChildren().addAll(btnRefresh, btnOpenCard, testField);
         } else {
-            toolbar.getChildren().addAll(btnRefresh, btnCategory, btnCards, btnOpenCard, textSearch, btnReset);
+            toolbar.getChildren().addAll(btnRefresh, btnCategory, btnCards, btnOpenCard, testField);
         }
+
+        btnOpenCard.setOnAction(e -> {
+            System.out.println("setonaction");
+            setMiDocEdit();
+        });
     }
 
     @FXML
@@ -461,6 +485,8 @@ public class MainController {
 
     @FXML
     private void setMiDocEdit() {
+        System.out.println("setmidocedit");
+
         Doc selectedDoc = tableDoc.getSelectionModel().getSelectedItem();
         if (selectedDoc != null) {
             boolean okClicked = mainApp.showDocEditDialog(selectedDoc, "update", Utils.TypeModeDoc.EDIT);

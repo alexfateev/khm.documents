@@ -33,7 +33,7 @@
                   <MenuItem fx:id="miDocDelete" mnemonicParsing="false" onAction="#setMiDocDelete" text="Удалить" />
               </items>
             </MenuButton>
-            <Button fx:id="btnOpenCard" mnemonicParsing="false" text="Открыть карточку" onAction="#setBtnOpenFile"/>
+            <Button fx:id="btnOpenCard" mnemonicParsing="false" text="Открыть карточку" />
             <TextField fx:id="textSearch" prefHeight="25.0" prefWidth="272.0" promptText="Поиск..." />
             <Button fx:id="btnReset" mnemonicParsing="false" onAction="#setBtnReset" text="Сброс" />
          </children>

@@ -122,7 +122,7 @@ public class Main extends Application {
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("Views/DocEdit.fxml"));
+            loader.setLocation(Main.class.getResource("views/DocEdit.fxml"));
             Parent root = loader.load();
 
             // Создаём диалоговое окно Stage.
@@ -155,7 +155,7 @@ public class Main extends Application {
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("Views/DocFileSelect.fxml"));
+            loader.setLocation(Main.class.getResource("views/DocFileSelect.fxml"));
             Parent root = loader.load();
 
             // Создаём диалоговое окно Stage.
@@ -163,7 +163,7 @@ public class Main extends Application {
             dialogStage.setTitle("Выбор файла");
             dialogStage.setResizable(false);
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            //dialogStage.initOwner(primaryStage);
+            dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(root);
             dialogStage.setScene(scene);
 
